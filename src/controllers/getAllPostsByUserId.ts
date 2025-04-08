@@ -16,6 +16,7 @@ const getAllPostsByUserIdGET = asyncHandler(async function getAllPosts(
 ) {
     if (!req.user) {
         throw new Error("User not logged in");
+        return;
     }
     const posts = await prisma.post.findMany({
         select: {
