@@ -6,6 +6,7 @@ type LoginRequest = {
 type CreatePostRequest = {
     title: string;
     content: string;
+    description: string;
     user?: { username: string; id: number };
 };
 

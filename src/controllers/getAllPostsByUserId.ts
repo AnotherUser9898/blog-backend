@@ -18,18 +18,27 @@ const getAllPostsByUserIdGET = asyncHandler(async function getAllPosts(
         throw new Error("User not logged in");
     }
     const posts = await prisma.post.findMany({
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            updatedAt: true,
+        },
         where: {
             authorId: Number(req.user.id),
         },
     });
 
     if (posts.length == 0) {
+        console.log("inside if");
         res.status(200).json({
             message: "No posts found",
             posts: [],
         });
         return;
     }
+
+    console.log("outside if");
 
     res.status(200).json({
         message: "success",

@@ -8,13 +8,27 @@ const getAllPostsGET = asyncHandler(async function getAllPosts(
     req: Request,
     res: Response
 ) {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            updatedAt: true,
+            author: {
+                select: {
+                    firstname: true,
+                    lastname: true,
+                },
+            },
+        },
+    });
 
     if (posts.length == 0) {
-        res.status(404).json({
+        res.status(200).json({
             message: "No posts found",
             posts: [],
         });
+        return;
     }
 
     res.status(200).json({

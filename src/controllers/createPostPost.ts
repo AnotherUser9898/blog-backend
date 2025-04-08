@@ -31,6 +31,7 @@ const createPostPost = asyncHandler(async function (
                 title: req.body.title,
                 content: req.body.content,
                 authorId: user.id,
+                description: req.body.description,
             },
         });
 

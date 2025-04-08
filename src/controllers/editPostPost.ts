@@ -27,6 +27,7 @@ const editPostPost = asyncHandler(async function editPost(
                 title: req.body.title,
                 content: req.body.content,
                 authorId: user.id,
+                description: req.body.description,
             },
             where: {
                 id: Number(postId),
